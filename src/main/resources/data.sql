@@ -12065,3 +12065,5 @@ INSERT INTO venta_producto (id, venta_id, producto_id, cantidad, total) VALUES (
 INSERT INTO venta_producto (id, venta_id, producto_id, cantidad, total) VALUES (7565, 2999, 335, 1, 936.00);
 INSERT INTO venta_producto (id, venta_id, producto_id, cantidad, total) VALUES (7566, 2999, 445, 4, 1328.01);
 INSERT INTO venta_producto (id, venta_id, producto_id, cantidad, total) VALUES (7567, 3000, 841, 3, 1873.86);
+
+SELECT setval('producto_id_seq', (SELECT MAX(id) FROM producto));
