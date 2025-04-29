@@ -1,0 +1,34 @@
+package com.prueba.sponce.controller;
+
+import com.prueba.sponce.dto.ClienteMayorIngresoDTO;
+import com.prueba.sponce.dto.ProductoMasVendidoDTO;
+import com.prueba.sponce.service.VentaEstadisticaService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/ventas/estadisticas")
+@RequiredArgsConstructor
+public class VentaEstadisticaController {
+
+    private final VentaEstadisticaService ventaEstadisticaService;
+
+    @GetMapping("/top-productos")
+    public ResponseEntity<List<ProductoMasVendidoDTO>> top3Productos() {
+        return ResponseEntity.ok(ventaEstadisticaService.obtenerTop3Productos());
+    }
+
+    @GetMapping("/mejor-cliente")
+    public ResponseEntity<ClienteMayorIngresoDTO> mejorCliente() {
+        return ResponseEntity.ok(ventaEstadisticaService.clienteMayorIngreso());
+    }
+
+    @GetMapping("/ingreso-ultimo-mes")
+    public ResponseEntity<Double> ingresoUltimoMes() {
+        return ResponseEntity.ok(ventaEstadisticaService.ingresoTotalUltimoMes());
+    }
+}
