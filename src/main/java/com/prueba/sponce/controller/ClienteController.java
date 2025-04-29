@@ -2,9 +2,12 @@ package com.prueba.sponce.controller;
 
 import com.prueba.sponce.dto.ClienteRequestDTO;
 import com.prueba.sponce.dto.ClienteResponseDTO;
+import com.prueba.sponce.dto.PageResponseDTO;
 import com.prueba.sponce.service.ClienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,5 +47,14 @@ public class ClienteController {
     public ResponseEntity<Void> eliminarCliente(@PathVariable Long id) {
         clienteService.eliminarCliente(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/paginado")
+    public ResponseEntity<PageResponseDTO<ClienteResponseDTO>> listarPaginado(
+            @RequestParam(required = false) String nombre,
+            @PageableDefault(page = 0, size = 10, sort = "nombre") Pageable pageable
+    ) {
+        PageResponseDTO<ClienteResponseDTO> resultado = clienteService.listarPaginado(nombre, pageable);
+        return ResponseEntity.ok(resultado);
     }
 }

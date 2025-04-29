@@ -2,9 +2,12 @@ package com.prueba.sponce.service;
 
 import com.prueba.sponce.dto.ClienteRequestDTO;
 import com.prueba.sponce.dto.ClienteResponseDTO;
+import com.prueba.sponce.dto.PageResponseDTO;
 import com.prueba.sponce.model.Cliente;
 import com.prueba.sponce.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,5 +76,28 @@ public class ClienteServiceImpl implements ClienteService {
         dto.setNombre(cliente.getNombre());
         dto.setCorreo(cliente.getCorreo());
         return dto;
+    }
+
+    public PageResponseDTO<ClienteResponseDTO> listarPaginado(String nombre, Pageable pageable) {
+        Page<Cliente> pagina;
+
+        if (nombre != null && !nombre.isBlank()) {
+            pagina = clienteRepository.findByNombreContainingIgnoreCase(nombre, pageable);
+        } else {
+            pagina = clienteRepository.findAll(pageable);
+        }
+
+        List<ClienteResponseDTO> contenido = pagina.getContent().stream()
+                .map(this::convertirAResponseDTO)
+                .collect(Collectors.toList());
+
+        return new PageResponseDTO<>(
+                contenido,
+                pagina.getNumber(),
+                pagina.getSize(),
+                pagina.getTotalElements(),
+                pagina.getTotalPages(),
+                pagina.isLast()
+        );
     }
 }
