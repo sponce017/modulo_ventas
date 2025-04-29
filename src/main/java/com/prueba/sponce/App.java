@@ -1,13 +1,13 @@
-package com.prueba.sponce.modulo_ventas;
+package com.prueba.sponce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ModuloVentasApplication {
+public class App {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ModuloVentasApplication.class, args);
+		SpringApplication.run(App.class, args);
 	}
 
 }
