@@ -18,8 +18,13 @@ spring:
 
   sql:
     init:
-      mode: always
+      mode: never
 
   jackson:
     serialization:
       write-dates-as-timestamps: false
+        # App Properties
+sponce:
+    app:
+      jwtSecret: ======================sponce=Spring===========================
+      jwtExpirationMs: 86400000
