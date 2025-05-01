@@ -1,6 +1,7 @@
 package com.prueba.sponce.controller;
 
 import com.prueba.sponce.dto.ClienteMayorIngresoDTO;
+import com.prueba.sponce.dto.IngresoMensualDTO;
 import com.prueba.sponce.dto.ProductoMasVendidoDTO;
 import com.prueba.sponce.service.VentaEstadisticaService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,8 @@ public class VentaEstadisticaController {
     }
 
     @GetMapping("/ingreso-ultimo-mes")
-    public ResponseEntity<Double> ingresoUltimoMes() {
-        return ResponseEntity.ok(ventaEstadisticaService.ingresoTotalUltimoMes());
+    public ResponseEntity<IngresoMensualDTO> ingresoUltimoMes() {
+        double total = ventaEstadisticaService.ingresoTotalUltimoMes();
+        return ResponseEntity.ok(new IngresoMensualDTO(total));
     }
 }
