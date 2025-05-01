@@ -12072,13 +12072,13 @@ SELECT setval('producto_id_seq', (SELECT MAX(id) FROM producto));
 INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
 INSERT INTO roles (name) VALUES ('ROLE_OPERADOR');
 
--- Contraseña: adminpass (hash válido con 10 rounds)
+-- Contraseña: adminpass
 INSERT INTO usuarios (username, email, password)
 VALUES ('admin', 'admin@demo.com', '$2a$10$Sj0po4io6ZJtxtifQF1B3exEq.SUb7j9zaS0HnwedxcbUT2n1ckFW');
 
--- Contraseña: operador1 (usa mismo hash para simplicidad)
+-- Contraseña: operadorpass
 INSERT INTO usuarios (username, email, password)
-VALUES ('operador', 'op@demo.com', '$2a$10$Sj0po4io6ZJtxtifQF1B3exEq.SUb7j9zaS0HnwedxcbUT2n1ckFW');
+VALUES ('operador', 'op@demo.com', '$2a$10$78ysv.dejchQrnRvCeU/HuVBsK4mOZplsOyvbulDhkswSpQCGj5iK');
 
 -- Asignar roles
 
